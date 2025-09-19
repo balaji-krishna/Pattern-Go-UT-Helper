@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pattern-Based GoLang UT Helper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      margin: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .upload-section {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .upload-section h3 {
+      color: #4a6ee0;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #dde1f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      box-sizing: border-box;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: #4a6ee0;
+      outline: none;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 200px;
+    }
+    .btn {
+      background-color: #4a6ee0;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn:hover {
+      background-color: #3a5dd4;
+    }
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .generate-section {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+    }
+    .generate-btn {
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .output-section {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .output {
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 300px;
+      white-space: pre-wrap;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    h1 {
+      color: #4a6ee0;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    .status.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .status.info {
+      background-color: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Pattern-Based GoLang UT Helper</h1>
+      <p class="subtitle">Intelligent AI agent for standardized unit test case generation for Go projects</p>
+    </div>
+
+    <!-- Pattern Upload Section -->
+    <div class="upload-section">
+      <h3>📄 Step 1: Upload UT Pattern</h3>
+      <div class="form-group">
+        <label for="pattern-name">Pattern Name:</label>
+        <input type="text" id="pattern-name" placeholder="e.g., GoMonkey Testing Pattern" />
+      </div>
+      <div class="form-group">
+        <label for="pattern-description">Description (Optional):</label>
+        <input type="text" id="pattern-description" placeholder="Brief description of the testing methodology" />
+      </div>
+      <div class="form-group">
+        <label for="pattern-content">Pattern Content:</label>
+        <textarea id="pattern-content" placeholder="Paste your UT pattern file content here...&#10;&#10;Example:&#10;package main_test&#10;&#10;import (&#10;    &quot;testing&quot;&#10;    &quot;github.com/agiledragon/gomonkey/v2&quot;&#10;    &quot;github.com/stretchr/testify/assert&quot;&#10;)&#10;&#10;func TestExampleFunction(t *testing.T) {&#10;    // Test implementation following your pattern&#10;}"></textarea>
+      </div>
+      <button class="btn" id="upload-pattern-btn">Upload Pattern</button>
+    </div>
+
+    <!-- Source Code Upload Section -->
+    <div class="upload-section">
+      <h3>🔧 Step 2: Upload Go Source Code</h3>
+      <div class="form-group">
+        <label for="file-name">File Name:</label>
+        <input type="text" id="file-name" placeholder="e.g., main.go" />
+      </div>
+      <div class="form-group">
+        <label for="package-name">Package Name (Optional):</label>
+        <input type="text" id="package-name" placeholder="e.g., main" />
+      </div>
+      <div class="form-group">
+        <label for="source-code">Go Source Code:</label>
+        <textarea id="source-code" placeholder="Paste your Go source code here...&#10;&#10;Example:&#10;package main&#10;&#10;import &quot;fmt&quot;&#10;&#10;func Add(a, b int) int {&#10;    return a + b&#10;}&#10;&#10;func main() {&#10;    fmt.Println(Add(2, 3))&#10;}"></textarea>
+      </div>
+      <button class="btn" id="upload-source-btn">Upload Source Code</button>
+    </div>
+
+    <!-- Generate Tests Section -->
+    <div class="generate-section">
+      <h3>🤖 Step 3: Generate Unit Tests</h3>
+      <div class="form-group">
+        <label for="additional-context">Additional Context (Optional):</label>
+        <textarea id="additional-context" placeholder="Any additional context or specific requirements for test generation..." style="min-height: 100px;"></textarea>
+      </div>
+      <button class="btn generate-btn" id="generate-tests-btn" disabled>Generate Unit Tests</button>
+      <div id="status-message"></div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section">
+      <h3>📋 Generated Unit Tests</h3>
+      <div id="output" class="output">Generated unit tests will appear here...</div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
