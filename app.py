@@ -129,6 +129,21 @@ Please provide only the Go test code without any additional explanations.
             error=f"Unexpected error: {str(e)}"
         )
 
+@app.get("/")
+async def root():
+    """Root endpoint - API information"""
+    return {
+        "message": "Pattern-Based GoLang UT Helper API",
+        "version": "1.0.0",
+        "description": "Intelligent AI agent for standardized unit test case generation for Go projects",
+        "endpoints": {
+            "POST /generate-unit-test": "Generate unit tests based on Go code and pattern",
+            "GET /health": "Health check endpoint",
+            "GET /docs": "Interactive API documentation",
+            "GET /redoc": "Alternative API documentation"
+        }
+    }
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
